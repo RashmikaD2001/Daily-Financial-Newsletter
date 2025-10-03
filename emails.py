@@ -18,17 +18,18 @@ def send_email(recipient_emails, body):
     subject = f"Financial News Update for {yesterday}"
 
     try:
-        msg = MIMEMultipart()
-        msg['From'] = EMAIL_ADDRESS
-        msg['To'] = ", ".join(recipient_emails)
-        msg['Subject'] = subject
-
-        msg.attach(MIMEText(body, 'html'))
-
         with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
             server.starttls()
             server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-            server.sendmail(EMAIL_ADDRESS, recipient_emails, msg.as_string())
+
+            for recipient in recipient_emails:
+                msg = MIMEMultipart()
+                msg['From'] = EMAIL_ADDRESS
+                msg['To'] = recipient
+                msg['Subject'] = subject
+                msg.attach(MIMEText(body, 'html'))
+
+                server.sendmail(EMAIL_ADDRESS, recipient, msg.as_string())
 
     except Exception as e:
         print(f"Error sending email: {e}")
