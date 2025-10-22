@@ -74,13 +74,3 @@ def getData(cleaned_articles):
             continue
     
     return financial_data
-
-# Usage example
-if __name__ == "__main__":
-    news = getNews()
-    if news:
-        print(f"Successfully fetched {len(news)} articles")
-        data = getData(news)
-        print(f"Successfully processed {len(data)} stocks")
-    else:
-        print("Failed to fetch news articles")

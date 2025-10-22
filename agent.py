@@ -56,5 +56,11 @@ prompt_template = ChatPromptTemplate.from_messages([
 
 def news_generator(news_data):
     formatted_input = prompt_template.format_prompt(news_data=news_data).to_messages()
-    result = agent.invoke(formatted_input)
-    return result['output']
+    
+    try:
+        result = agent.invoke(formatted_input)
+        model_output = {'response' : True, 'news' : result['output']}
+        return model_output
+    except Exception as e:
+        model_output = {'response' : False, 'msg' : f'{e}'}
+        return model_output

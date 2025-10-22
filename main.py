@@ -4,6 +4,9 @@ from emails import send_email
 from template import build_email_template
 import yaml
 
+from dotenv import load_dotenv
+import os
+
 if __name__ == "__main__":
     with open("email.yaml", "r") as f:
         config = yaml.safe_load(f)
@@ -13,7 +16,17 @@ if __name__ == "__main__":
     data = getData(news)
 
     newsletter = news_generator(news_data=data)
-    email_body = build_email_template(newsletter)
-    send_email(recipient_email_list, email_body)
+
+    if newsletter['response']:
+        email_body = build_email_template(newsletter['news'])
+        send_email(recipient_email_list, email_body)
+    else:
+
+        load_dotenv()
+        admin = [os.getenv("ADMIN_EMAIL")]
+        email_body = f"An error occured {newsletter['msg']}"
+        send_email(admin, email_body)
+
+
 
     
