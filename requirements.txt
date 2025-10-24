@@ -1,9 +1,9 @@
 python-dotenv==1.1.1
 langchain==0.3.26
-langchain-core==1.0.0
+langchain-core>=0.3.66,<1.0.0
 langchain-community==0.4.0
 langchain-google-genai==3.0.0
-yfinance== 0.2.66
+yfinance==0.2.66
 markdown==3.8.2
 requests==2.32.5
 PyYAML==6.0.2
