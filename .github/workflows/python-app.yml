@@ -6,7 +6,7 @@ name: Daily Financial Newsletter
 on:
   schedule:
     # UTC time — this example runs daily at 6:00 AM UTC (adjust as you like)
-    - cron: "15 15 * * *"
+    - cron: "00 16 * * *"
   workflow_dispatch: # allow manual trigger too
 
 jobs:
