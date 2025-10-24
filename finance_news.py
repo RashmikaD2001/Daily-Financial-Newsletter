@@ -15,11 +15,9 @@ API_ENDPOINT = f"https://financialmodelingprep.com/stable/fmp-articles?page=0&li
 
 def getNews():
     try:
-        # Changed from POST to GET
         response = requests.get(API_ENDPOINT)
         response.raise_for_status()
         
-        # Fixed JSON parsing - use .json() method
         articles = response.json()
         
         # Remove "image" and "id" from each article
